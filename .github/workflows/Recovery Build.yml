@@ -145,13 +145,6 @@ jobs:
       with:
         swap-size-gb: 12
 
-    - name: Install Python 2
-      if: ${{ steps.buildtree.outputs.value == 'omni' }}
-      run: |
-        sudo apt -y install python2
-        cd /usr/bin
-        sudo ln -sf python2 python
-
     - name: Building recovery
       run: |
         source build/envsetup.sh
