@@ -146,14 +146,11 @@ jobs:
 
     - name: Building recovery
       run: |
-        repo sync
         make clobber
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
-        lunch ${{ github.event.inputs.MAKEFILE_NAME }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all)
-        mka recoveryimage -j8
-        mka bootimage -j8
-        mka vendorbootimage -j8
+        lunch ${{ github.event.inputs.MAKEFILE_NAME }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all) -j8
+     
       working-directory: ${{ steps.pwd.outputs.workspace-folder }}
 
     - name: Upload to Release
